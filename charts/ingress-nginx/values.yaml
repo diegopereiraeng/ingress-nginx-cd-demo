@@ -14,7 +14,7 @@ commonLabels: {}
 # myLabel: aakkmd
 
 controller:
-  name: controller
+  name: controller-cd-demo
   image:
     ## Keep false as default for now!
     chroot: false
@@ -35,7 +35,7 @@ controller:
   existingPsp: ""
 
   # -- Configures the controller container name
-  containerName: controller
+  containerName: controller-cd-demo
 
   # -- Configures the ports that the nginx-controller listens on
   containerPort:
@@ -100,19 +100,19 @@ controller:
       https: 443
 
   # -- Election ID to use for status update
-  electionID: ingress-controller-leader
+  electionID: ingress-controller-leader-cd-demo
 
   ## This section refers to the creation of the IngressClass resource
   ## IngressClass resources are supported since k8s >= 1.18 and required since k8s >= 1.19
   ingressClassResource:
     # -- Name of the ingressClass
-    name: nginx
+    name: nginx-cd-demo
     # -- Is this ingressClass enabled or not
     enabled: true
     # -- Is this the default ingressClass for the cluster
-    default: false
+    default: true
     # -- Controller-value of the controller that is processing this ingressClass
-    controllerValue: "k8s.io/ingress-nginx"
+    controllerValue: "k8s.io/ingress-nginx-cd-demo"
 
     # -- Parameters is a link to a custom resource containing additional
     # configuration for the controller. This is optional if the controller
@@ -121,7 +121,7 @@ controller:
 
   # -- For backwards compatibility with ingress.class annotation, use ingressClass.
   # Algorithm is as follows, first ingressClassName is considered, if not present, controller looks for ingress.class annotation
-  ingressClass: nginx
+  ingressClass: nginx-cd-demo
 
   # -- Labels to add to the pod container metadata
   podLabels: {}
@@ -240,11 +240,11 @@ controller:
     #         - key: app.kubernetes.io/name
     #           operator: In
     #           values:
-    #           - ingress-nginx
+    #           - ingress-nginx-cd-demo
     #         - key: app.kubernetes.io/instance
     #           operator: In
     #           values:
-    #           - ingress-nginx
+    #           - ingress-nginx-cd-demo
     #         - key: app.kubernetes.io/component
     #           operator: In
     #           values:
@@ -259,11 +259,11 @@ controller:
     #       - key: app.kubernetes.io/name
     #         operator: In
     #         values:
-    #         - ingress-nginx
+    #         - ingress-nginx-cd-demo
     #       - key: app.kubernetes.io/instance
     #         operator: In
     #         values:
-    #         - ingress-nginx
+    #         - ingress-nginx-cd-demo
     #       - key: app.kubernetes.io/component
     #         operator: In
     #         values:
